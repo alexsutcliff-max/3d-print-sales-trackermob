@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0b0b0b" />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="icon" href="icon-192.png" />
+<title>Print Sales Tracker</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+  <div class="p-6 max-w-xl mx-auto">
+    <h1 class="text-2xl font-bold mb-2">Print Sales Tracker</h1>
+    <p class="mb-4">This folder is ready to deploy. Replace this file with your full <code>index.html</code> from the canvas build, or ask me to embed it now.</p>
+    <ul class="list-disc pl-6">
+      <li>Includes PWA files (manifest + service worker)</li>
+      <li>Includes <code>netlify.toml</code> for SPA routing</li>
+      <li>Includes GitHub Pages workflow file</li>
+    </ul>
+  </div>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => // SW disabled on GitHub Pages for now);
+    }
+  </script>
+</body>
+</html>
