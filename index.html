@@ -7,15 +7,34 @@
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="icon" href="icon-192.png" />
     <title>Print Sales Tracker</title>
+
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script crossorigin src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <!-- React first -->
+    <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <!-- Babel (for JSX in app.js) -->
     <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/recharts/umd/Recharts.min.js"></script>
-    <style>.safe-bottom{padding-bottom:calc(env(safe-area-inset-bottom,0px)+72px)}.bottom-bar{height:64px;padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+
+    <!-- Recharts UMD (explicit version) -->
+    <script src="https://unpkg.com/recharts@2.12.6/umd/Recharts.min.js"></script>
+
+    <style>
+      .safe-bottom { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 72px); }
+      .bottom-bar { height: 64px; padding-bottom: env(safe-area-inset-bottom, 0px); }
+    </style>
   </head>
   <body class="bg-gray-100">
     <div id="root" class="safe-bottom">Loading…</div>
+
+    <!-- Load the app AFTER Recharts is on window -->
+    <script>
+      if (!window.Recharts) {
+        console.error("Recharts failed to load");
+      }
+    </script>
     <script type="text/babel" data-presets="react,env" src="app.js"></script>
   </body>
 </html>
