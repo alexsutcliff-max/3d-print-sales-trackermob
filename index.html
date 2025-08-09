@@ -18,9 +18,6 @@
     <!-- Babel (for JSX in app.js) -->
     <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
 
-    <!-- Recharts UMD (explicit version) -->
-    <script src="https://unpkg.com/recharts@2.12.6/umd/Recharts.min.js"></script>
-
     <style>
       .safe-bottom { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 72px); }
       .bottom-bar { height: 64px; padding-bottom: env(safe-area-inset-bottom, 0px); }
@@ -29,12 +26,46 @@
   <body class="bg-gray-100">
     <div id="root" class="safe-bottom">Loading…</div>
 
-    <!-- Load the app AFTER Recharts is on window -->
+    <!-- Recharts with fallback + only boot app after it's loaded -->
     <script>
-      if (!window.Recharts) {
-        console.error("Recharts failed to load");
-      }
+      (function loadRechartsAndBoot() {
+        function injectRecharts(src, onload, onerror) {
+          var s = document.createElement('script');
+          s.src = src;
+          s.onload = onload;
+          s.onerror = onerror;
+          document.head.appendChild(s);
+        }
+
+        function bootApp() {
+          if (!window.Recharts) {
+            console.error("Recharts still missing; retrying…");
+            return setTimeout(bootApp, 300);
+          }
+          // Now load the app code AFTER Recharts is ready
+          var app = document.createElement('script');
+          app.type = 'text/babel';
+          app.setAttribute('data-presets', 'react,env');
+          app.src = 'app.js';
+          document.body.appendChild(app);
+        }
+
+        // Try jsDelivr first, then unpkg
+        injectRecharts(
+          'https://cdn.jsdelivr.net/npm/recharts@2.12.6/umd/Recharts.min.js',
+          bootApp,
+          function () {
+            console.warn('jsDelivr failed, trying unpkg…');
+            injectRecharts(
+              'https://unpkg.com/recharts@2.12.6/umd/Recharts.min.js',
+              bootApp,
+              function () {
+                console.error('Recharts failed to load from both CDNs.');
+              }
+            );
+          }
+        );
+      })();
     </script>
-    <script type="text/babel" data-presets="react,env" src="app.js"></script>
   </body>
 </html>
