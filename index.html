@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Print Sales Tracker</title>
+
+  <!-- TailwindCSS for styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Load React + ReactDOM (production versions) -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <!-- Babel to compile JSX in-browser -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-gray-100">
+  <div id="root" class="min-h-screen p-4">Loading...</div>
+
+  <!-- Main App Script -->
+  <script type="text/babel" data-presets="react,env">
+    function App() {
+      return (
+        <div className="max-w-xl mx-auto bg-white rounded-2xl p-4 shadow">
+          <h1 className="text-2xl font-bold mb-2">Print Sales Tracker</h1>
+          <p>Your app is now running on GitHub Pages!</p>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</body>
+</html>
